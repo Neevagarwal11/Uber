@@ -1,0 +1,19 @@
+Packages Used:
+1.express
+2.bcrypt
+3.jsonwebtoken
+4.cors ------->Used for cross origin request sharing. from 1 domain request could be sent to another domain
+5.express-validator ---------> Used to validate the data coming from the FE
+
+
+
+
+
+
+
+File Spec
+1. DB folder is just for connecting to the DB
+2. Model consists of the DB model like userModel , CaptainModel
+3. Models are required in controllers where all the logic in the model are incorperated.
+4. Routes folder contains the userRoutes , driverRoutes , adminRoutes etc. , all these routes cotain all the specific routes the route owner requires.
+5. Server file is the main file to be executed .  If and only if the server file is executed the full file will execute.

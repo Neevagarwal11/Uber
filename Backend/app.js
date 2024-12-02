@@ -4,9 +4,9 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const connectToDB = require('./DB/db')
-const userRoutes = require('./Routes/userRoutes')
 const cookieParser = require('cookie-parser')
-
+const userRoutes = require('./Routes/userRoutes')
+const captainRoutes = require('./Routes/captainRoutes')
 
 connectToDB()
  
@@ -20,5 +20,6 @@ app.get('/' , (req,res)=>{
     res.send('Hello World')
 })
 app.use('/users' , userRoutes)
+app.use('/captain' , captainRoutes)
 
 module.exports =app

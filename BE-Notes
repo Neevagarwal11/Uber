@@ -4,7 +4,7 @@ Packages Used:
 3.jsonwebtoken
 4.cors ------->Used for cross origin request sharing. from 1 domain request could be sent to another domain
 5.express-validator ---------> Used to validate the data coming from the FE
-
+6.Cookie-parser
 
 
 

@@ -1,29 +1,56 @@
-import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
-
+import React, { useContext, useState } from 'react'
+import {Link , useNavigate} from 'react-router-dom'
+import axios from 'axios'
+import {UserDataContext}  from '../Context/UContext.jsx'
 
 function UserSignup() {
     const [firstName, setFirstName] = useState('')
     const [lastName, setlastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [userData, setUserData] = useState({})
 
-    const submitHandler =()=>{
-        e.preventDefault()
-        setUserData({
+
+
+    const navigate = useNavigate()
+    const {user,setUser} = useContext(UserDataContext)
+
+    const submitHandler =async  (e) => {
+        e.preventDefault();
+        
+        const newUser = {
             fullname:{
-                firstName:firstName,
-                lastName:lastName,
+                firstname:firstName,
+                lastname:lastName,
             },
             email:email,
             password:password
-        })
+        }
 
-        setFirstName("")
-        setlastName('')
-        setEmail('')
-        setPassword('')
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register` , newUser)
+        // try {
+        //     const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`, newUser);
+        //     if (response.status === 201) {
+        //         const data = response.data;
+        //         setUser(data.user);
+        //         navigate('/home');
+        //     }
+        // } catch (error) {
+        //     console.error('Error during registration:', error);
+        //     alert(error.response?.data?.message || 'Registration failed');
+        // }
+
+
+        if(response.status ===201){
+            const data = response.data
+            
+            setUser(data.user)
+            navigate('/home')
+        }
+
+        // setFirstName("")
+        // setlastName('')
+        // setEmail('')
+        // setPassword('')
     }
 
   return (
@@ -46,7 +73,7 @@ function UserSignup() {
         <input type="email" value={email} onChange={(e)=>{  setEmail(e.target.value)}} className='bg-[#eeeeee] rounded mb-6 text-lg placeholder:text-base  px-4 py-2 border-2 w-full ' required placeholder='email@example.com' />
         <h3 className='text-lg font-medium mb-2'>Enter Password</h3>
         <input type="password" value={password} onChange={(e)=>{ setPassword(e.target.value)}} className='bg-[#eeeeee] rounded mb-6 text-lg placeholder:text-base  px-4 py-2 border-2 w-full ' required placeholder='Password' />
-        <button className='w-full bg-[#111] text-white font-semibold mb-7 rounded px-4 py-2 border'>Login</button>
+        <button className='w-full bg-[#111] text-white font-semibold mb-7 rounded px-4 py-2 border'>Create Account</button>
 
         <p className='text-center'>Already have a account?
         <Link to='/userlogin' className='text-blue-600 ml-2'>Login here</Link>

@@ -6,6 +6,7 @@ Packages Used:
 5.express-validator ---------> Used to validate the data coming from the FE
 6.Cookie-parser
 
+7.axios - Required to send data from FE to Server
 
 
 

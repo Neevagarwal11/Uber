@@ -8,7 +8,7 @@ const captainModel = require('../Models/captainModel');
 module.exports.authUser = async(req,res,next)=>{
     const token = req.cookies.token;
     if(!token){
-        return res.send(401).json({message :"Unauthorized"})
+        return res.status(401).json({message :"Unauthorized"})
     }
 
     const isBlackListed = await userModel.findOne({token:token})

@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import {Link , useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import {UserDataContext}  from '../Context/UContext.jsx'
-
+import cookie from 'js-cookie'
 function UserSignup() {
     const [firstName, setFirstName] = useState('')
     const [lastName, setlastName] = useState('')
@@ -42,8 +42,9 @@ function UserSignup() {
 
         if(response.status ===201){
             const data = response.data
-            
             setUser(data.user)
+            cookie.set('token' ,data.token)
+            localStorage.setItem('token' , data.token)
             navigate('/home')
         }
 

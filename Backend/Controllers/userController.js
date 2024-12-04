@@ -2,7 +2,7 @@ const userModel  =  require('../Models/userModel')
 const userService = require('../Services/userService')
 const {validationResult} = require('express-validator')
 const blacklistTokenModel = require('../Models/blacklistToken')
-
+const cookieParser = require('cookie-parser')
 
 module.exports.registerUser = async (req,res,next)=>{
     const errors = validationResult(req);
@@ -48,14 +48,14 @@ module.exports.loginUser = async(req,res,next)=>{
         return res.status(401).json({message:"Invalid email or password"})
     }
     
-    const isMatch = await user.comparePassword(password)
+    const isMatch = await user.comparePassword(password) //gives value in boolean
     
     if(!isMatch){
         return res.status(401).json({message:"Invalid email or password"})
     }
 
     const token = user.generateAuthToken();
-    res.cookie('token' , token)
+    res.cookie('token', token);
     res.status(200).json({token,user , message:"Password Correct"})
 }
 

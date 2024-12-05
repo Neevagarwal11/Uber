@@ -19,13 +19,14 @@ module.exports.authUser = async(req,res,next)=>{
 
     try{
         const decoded = jwt.verify(token , process.env.JWT_SECRET)
-        const user = await blacklistToken.findById(decoded._id)
+        const user = await userModel.findById(decoded._id)
 
         req.user = user
 
         return next();
 
     }catch(err){
+        console.log(err)
         return res.status(401).json({message:"Unauthorized"})
     }
 }

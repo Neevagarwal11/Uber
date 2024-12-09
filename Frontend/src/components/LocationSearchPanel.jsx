@@ -16,7 +16,7 @@ function LocationSearchPanel(props) {
         {/* Sample Data */}
 
         {
-            locations.map(function(elem){
+            locations.map(function(elem , index){
                 return <div onClick={()=>{ props.setVehiclePanel(true), props.setPanelOpen(false) }} className='flex my-2 border-2 border-white active:border-black p-3 rounded-xl  items-center justify-start gap-4'>
                     <h2 className='bg-[#eee] h-10 flex items-center justify-center  w-10  rounded-full '><i className="ri-map-pin-5-fill"></i></h2>
                     <h4 className='font-medium'>{elem}</h4>

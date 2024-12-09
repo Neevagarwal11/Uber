@@ -86,9 +86,9 @@ function CaptainSignup() {
         <input type="number" value={vehicleCapacity} onChange={(e)=>{  setVehicleCapacity(e.target.value)}} className='bg-[#eeeeee] rounded text-lg placeholder:text-base  px-4 py-2 border-2 w-1/2 ' required placeholder='Vehicle Capacity' />
         <select value={vehicleType} required onChange={(e)=>{  setVehicleType(e.target.value)}} className='bg-[#eeeeee] rounded text-md placeholder:text-base py-2 border-2 w-1/2 ' placeholder="Vehicle Type">
             <option value="" disabled >Select Vehicle Type</option>
-            <option value="car"  >Car</option>
-            <option value="auto"  >Auto</option>
-            <option value="moto"  >Motorcycle</option>
+            <option value="car" >Car</option>
+            <option value="auto" >Auto</option>
+            <option value="moto" >Motorcycle</option>
         </select>
         </div>
 

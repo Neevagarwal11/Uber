@@ -5,6 +5,8 @@ import 'remixicon/fonts/remixicon.css'
 import LocationSearchPanel from '../components/LocationSearchPanel'
 import VehiclePanel from '../components/vehiclePanel'
 import ConfirmRide from '../components/ConfirmedVehicle'
+import LookingForDriver from '../components/LookingForDriver'
+import WaitingForDriver from '../components/waitingForDriver'
 
 function Home() {
 
@@ -17,6 +19,10 @@ function Home() {
   const vehiclePanelref = useRef(null)
   const [confirmedVehicle, setConfirmedVehicle] = useState(false)
   const confirmRide = useRef(null)
+  const [vehicleFound, setVehicleFound] = useState(false)
+  const vehicleFoundRef = useRef(null)
+  const waitingForDriverRef = useRef(null)
+  const [waitingForDriver, setWaitingForDriver] = useState(false)
 
   useEffect(()=>{
 
@@ -81,6 +87,43 @@ function Home() {
     }
 
   },[confirmedVehicle])
+
+
+  useEffect(()=>{
+
+    if(vehicleFound){
+
+      gsap.to(vehicleFoundRef.current,{
+        
+        transform:'translateY(0)'
+      })
+    }else{
+      
+      gsap.to(vehicleFoundRef.current,{
+        transform:'translateY(100%)'
+      })
+      
+    }
+
+  },[vehicleFound])
+ 
+  useEffect(()=>{
+
+    if(waitingForDriver){
+
+      gsap.to(waitingForDriverRef.current,{
+        
+        transform:'translateY(0)'
+      })
+    }else{
+      
+      gsap.to(waitingForDriverRef.current,{
+        transform:'translateY(100%)'
+      })
+      
+    }
+
+  },[waitingForDriver])
  
 
   const submitHandler =  (e) =>{
@@ -121,15 +164,25 @@ function Home() {
 
 
 
-      <div ref={vehiclePanelref} className='vehicleSelection translate-y-full  bg-white fixed px-3 py-8 z-10 bottom-0 w-full'>
+      <div ref={vehiclePanelref} className='vehicleSelection translate-y-full  bg-white fixed px-3 py-8 pt-12 z-10 bottom-0 w-full'>
         <VehiclePanel setConfirmedVehicle={setConfirmedVehicle} setVehiclePanel={setVehiclePanel}></VehiclePanel>
         
       </div>
 
 
-      <div ref={confirmRide} className='confirmRide translate-y-full  bg-red-500 fixed px-3 py-8 z-10 bottom-0 w-full'>
-          <ConfirmRide></ConfirmRide>
+      <div ref={confirmRide} className='confirmRide translate-y-full  bg-white fixed px-3 py-6 pt-12 z-10 bottom-0 w-full'>
+          <ConfirmRide setVehicleFound={setVehicleFound} setConfirmedVehicle={setConfirmedVehicle}></ConfirmRide>
       </div>
+
+      <div ref={vehicleFoundRef} className='vehicleFinding translate-y-full  bg-white fixed px-3 py-6 pt-12 z-10 bottom-0 w-full'>
+          <LookingForDriver setVehicleFound={setVehicleFound}></LookingForDriver>
+      </div>
+
+      <div ref={waitingForDriverRef}  className='confirmRide   bg-white fixed px-3 py-6 pt-12 z-10 bottom-0 w-full'>
+          <WaitingForDriver setWaitingForDriver={setWaitingForDriver}></WaitingForDriver>
+      </div>
+
+
 
 
     </div>

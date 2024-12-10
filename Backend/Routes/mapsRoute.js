@@ -14,6 +14,12 @@ router.get('/get-distance-time' ,
     query('destination').isString().isLength({min:3}),
     authMiddleware.authUser,
     mapController.getDistance
- )
+)
+
+router.get('/get-suggestion' , 
+    query('input').isString().isLength({min:3}),
+    authMiddleware.authUser,
+    mapController.getSuggestion
+)
 
 module.exports = router

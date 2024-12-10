@@ -66,3 +66,35 @@ module.exports.getDistanceTime = async (origin,destination)=>{
     }
 
 }
+
+module.exports.getSuggestion = async (input)=>{
+    if(!input){
+        throw new Erros('Query is required')
+    }
+
+    const apiKey = process.env.GOOGLE_MAPS_API
+    const url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json'
+
+    try{
+        const response = await axios.get(url , {
+            params:{
+                input: input, // The address or partial address string
+                key: apiKey, // Your API key
+                types: 'geocode', 
+            }
+        })
+
+        if(response.data.status === 'OK'){
+            return response.data.predictions.map((prediction) => ({
+                description: prediction.description,
+                placeId: prediction.place_id,
+              }));
+        }else{
+            throw new Error('Unable to fetch Suggestion')
+        }
+    }catch(err){
+        console.log(err)
+        throw err
+    }
+
+}

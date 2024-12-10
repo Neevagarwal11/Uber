@@ -12,6 +12,9 @@ import CaptainHome from './pages/CaptainHome'
 import CaptainProtectedWrapper from './pages/CaptainProtectWrapper'
 import CaptainLogout from './pages/CaptainLogout'
 import Riding from './pages/riding'
+import CaptainRiding from './pages/CaptainRiding'
+import 'remixicon/fonts/remixicon.css'
+
 
 function App() {
   return (
@@ -27,6 +30,7 @@ function App() {
           <Route path='/user/logout' element={<UserProjectedWrapper> <UserLogout></UserLogout> </UserProjectedWrapper>}></Route>
           <Route path='/captain/logout' element={<CaptainProtectedWrapper>  <CaptainLogout></CaptainLogout> </CaptainProtectedWrapper>}></Route>
           <Route path='/riding' element={<Riding></Riding>}></Route>
+          <Route path='/captainriding' element={<CaptainRiding/>}></Route>
       </Routes>
     </div>
   )

@@ -85,10 +85,15 @@ module.exports.getSuggestion = async (input)=>{
         })
 
         if(response.data.status === 'OK'){
-            return response.data.predictions.map((prediction) => ({
-                description: prediction.description,
-                placeId: prediction.place_id,
-              }));
+            return response.data.predictions.map((prediction)=>({
+                description:prediction.description,
+                placeId:prediction.place_id,
+                offset:prediction.offset
+            }));
+            // return response.data.predictions.map((prediction) => ({
+            //     description: prediction.description,
+            //     placeId: prediction.place_id,
+            //   }));
         }else{
             throw new Error('Unable to fetch Suggestion')
         }

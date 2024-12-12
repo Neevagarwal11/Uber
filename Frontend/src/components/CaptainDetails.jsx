@@ -1,12 +1,16 @@
-import React from 'react'
+import React , {useContext} from 'react'
+import { captainDataContext } from '../Context/captainContext'
 
 function CaptainDetails() {
+  const captain = useContext(captainDataContext)
+
+
   return (
     <div>
          <div className='flex items-center justify-between'>
         <div className='flex items-center justify-start gap-3'>
           <img className='h-10 w-10 rounded-full object-cover' src="https://preview.redd.it/created-random-people-using-chatgpt-midjourney-do-you-know-v0-q1aa450i5dqb1.png?width=1024&format=png&auto=webp&s=c4e9abc47d193474a2fa1a7e337d9d9340dce947" alt="" />
-          <h4 className='text-lg font-medium'>Ayaan</h4>
+          <h4 className='text-lg font-medium capitalize'>{captain.fullname.firstname}</h4>
         </div>
         <div>
           <h4 className='text-xl font-semibold'>₹2039.30</h4> 

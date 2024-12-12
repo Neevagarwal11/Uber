@@ -7,9 +7,9 @@ const LocationSearchPanel = ({suggestions , setVehiclePanel,setPanelOpen,setPick
     // console.log(suggestions)     returns an array
     const handelSuggestionClick = (suggestion)=>{
         if(activeField === 'pickup'){
-            setPickup(suggestion)
+            setPickup(suggestion.description)
         }else if(activeField ==='destination'){
-            setDestination(suggestion)
+            setDestination(suggestion.description)
         }
     }
 
@@ -20,9 +20,9 @@ const LocationSearchPanel = ({suggestions , setVehiclePanel,setPanelOpen,setPick
         {/* Sample Data */}
         {
             suggestions.map((elem , index)=>(
-                <div key={index} onClick={()=>{ handelSuggestionClick(elem), setVehiclePanel(true), setPanelOpen(false) }} className='flex bg-red-500 w-full  border-2 border-white active:border-black p-2 rounded-xl  items-center justify-start gap-2 my-3'>
-                    <h2 className='bg-[#eee] h-10 flex items-center justify-center w-14  rounded-full '><i className="ri-map-pin-5-fill"></i></h2>
-                    <h4 className='font-medium'>{elem.description}</h4>
+                <div key={index} onClick={()=>{ handelSuggestionClick(elem) }} className='flex bg-white w-full  border-2 border-white active:border-black p-0 rounded-xl  items-center justify-start gap-2 my-3'>
+                    <h2 className='bg-[#eee] h-10 mr-2 flex items-center justify-center w-12  rounded-full '><i className=" ri-map-pin-5-fill"></i></h2>
+                    <h4 className='font-medium text-md'>{elem.description}</h4>
                 </div>
                     
             ))                

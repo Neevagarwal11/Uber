@@ -8,12 +8,12 @@ const captainModel = require('../Models/captainModel');
 module.exports.authUser = async(req,res,next)=>{
     const token = req.cookies.token;
     if(!token){
-        return res.status(401).json({message :"Unauthorized"})
+        return res.status(401).json({message :"Unauthorized No cookie"})
     }
 
     const isBlackListed = await userModel.findOne({token:token})
     if(isBlackListed){
-        return res.status(401).json({message:'Unauthorized'})
+        return res.status(401).json({message:'Unauthorized Cookie Blacklisted'})
     }
 
 
@@ -27,7 +27,7 @@ module.exports.authUser = async(req,res,next)=>{
 
     }catch(err){
         console.log(err)
-        return res.status(401).json({message:"Unauthorized"})
+        return res.status(401).json({message:"Unauthorized Cookie Auth Failed"})
     }
 }
 

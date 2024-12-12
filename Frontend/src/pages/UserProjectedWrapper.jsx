@@ -2,15 +2,16 @@ import React , {useContext , useEffect, useState} from 'react'
 import { UserDataContext } from '../Context/UContext'
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios'
+import cookie from 'js-cookie'
 
 function UserProjectedWrapper({children}) {
     const navigate = useNavigate()
     const {user , setUser } = useContext(UserDataContext) 
-    const token = localStorage.getItem("token")
+    const token = cookie.get('token')
     const [isLoading, setIsLoading] = useState(true)
 
+    
 useEffect(()=>{
-
   if(!token){
     navigate('/userlogin')
   }

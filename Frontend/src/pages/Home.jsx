@@ -7,6 +7,8 @@ import VehiclePanel from '../components/vehiclePanel'
 import ConfirmRide from '../components/ConfirmedVehicle'
 import LookingForDriver from '../components/LookingForDriver'
 import WaitingForDriver from '../components/waitingForDriver'
+import axios from 'axios'
+import cookie from 'js-cookie'
 
 function Home() {
 
@@ -132,6 +134,48 @@ function Home() {
   }
 
 
+  const [pickupSuggestion, setPickupSuggestion] = useState([])
+  const [destinationsuggestion, setDestinationsuggestion] = useState([])
+  const [activeField, setActiveField] = useState('')
+  
+
+
+  const handelPickupChange = async (e)=>{
+
+    setPickup(e.target.value)
+    try{
+      const authtoken = cookie.get('token')
+
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-suggestion` , { 
+        params:{input:e.target.value},
+        withCredentials:true
+      })
+      setPickupSuggestion(response.data)
+      // console.log(pickupSuggestion)  gives an array 
+    }catch(err){
+      console.log(err , "Pickup Change mai error")
+    }
+
+  }
+
+
+
+  const handelDestinationChange = async (e)=>{
+    setDestination(e.target.value)
+    try{
+      const authtoken = cookie.get('token') 
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-suggestion` , {params:{input:e.target.value},
+        withCredentials:true
+      })
+
+      setDestinationsuggestion(response.data)
+      // console.log(destinationsuggestion) gives an array
+    }catch(err){
+      console.log(err , "Destination Change mai error")
+    }
+  }
+
+
 
 
   return (
@@ -149,15 +193,20 @@ function Home() {
         <h4 className='text-2xl font-semibold'>Find a Trip</h4>
         <form onSubmit={(e)=>{submitHandler(e)}}>
           <div className='line absolute h-14 left-[10%] rounded-full top-1/2 w-1 bg-black'></div>
-          <input value={pickup}       onChange={(e)=>{ setPickup(e.target.value) }}      onClick={()=>{setPanelOpen(true)}}      className='bg-[#eee] px-12 py-3 text-base rounded-lg mt-4 w-full' type="text" placeholder='Add a Pick-Up Location' />
-          <input value={destination}  onChange={(e)=>{ setDestination(e.target.value) }} onClick={()=>{setPanelOpen(true)}}      className='bg-[#eee] px-12 py-3 text-base rounded-lg mt-4 w-full' type="text" placeholder='Enter your Destination' />
+          <input value={pickup}       onChange={handelPickupChange}      onClick={()=>{setPanelOpen(true), setActiveField('pickup') }}      className='bg-[#eee] px-12 py-3 text-base rounded-lg mt-4 w-full' type="text" placeholder='Add a Pick-Up Location' />
+          <input value={destination}  onChange={handelDestinationChange} onClick={()=>{setPanelOpen(true) , setActiveField('destination')}}      className='bg-[#eee] px-12 py-3 text-base rounded-lg mt-4 w-full' type="text" placeholder='Enter your Destination' />
         </form>
         
         </div>
 
 
         <div ref={panelRef} className=' bg-white  h-[0%] '>
-          <LocationSearchPanel setPanelOpen={setPanelOpen} setVehiclePanel={setVehiclePanel} ></LocationSearchPanel>
+          <LocationSearchPanel setPanelOpen={setPanelOpen} setVehiclePanel={setVehiclePanel}
+          suggestions={activeField ==='pickup' ? pickupSuggestion: destinationsuggestion}
+          setPickup = {setPickup} 
+          setDestination={setDestination}
+          activeField={activeField}
+          ></LocationSearchPanel>
         </div>
 
       </div>

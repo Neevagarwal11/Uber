@@ -2,16 +2,17 @@ import React , {useContext , useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import { captainDataContext } from '../Context/captainContext'
 import axios from 'axios'
+import cookie from 'js-cookie'
 
 
 function CaptainProtectedWrapper({children}) {
     const navigate = useNavigate()
     const {captain , setCaptain}  = React.useContext(captainDataContext)
     const [isLoading, setIsLoading] = useState(true)
-
+    const token = cookie.get('token')   //Checking for exisitance of cookie
+    
     useEffect(()=>{
-
-        const token = localStorage.getItem("token")
+        // console.log(token)
         
         if(!token){
             navigate('/captainlogin')
@@ -31,7 +32,7 @@ function CaptainProtectedWrapper({children}) {
         navigate('/captainlogin')
     })
     
-},[navigate,setCaptain])
+},[navigate,setCaptain , setIsLoading, token ])
 
 
     if(isLoading){

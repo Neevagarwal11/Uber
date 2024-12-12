@@ -10,3 +10,6 @@ router.post('/create' , authMiddleware.authUser ,
     body('vehicleType').isString().isIn(['auto' , 'car' , 'motorcycle']).withMessage('Invalid Vehicle Type'),
     rideController.createRide
  )
+
+
+ module.exports = router

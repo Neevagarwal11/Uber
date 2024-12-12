@@ -23,7 +23,6 @@ function Captainlogin() {
             const data = response.data;
             setCaptain(data.captain)
             cookie.set('token' , data.token)
-            localStorage.setItem('token' , data.token)
             navigate('/captain-home')
             
         }

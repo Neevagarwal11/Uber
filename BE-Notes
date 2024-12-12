@@ -8,7 +8,7 @@ Packages Used:
 
 7.axios - Required to send data from FE to Server
 8.js-cookie - Used to set cookie using ReactJS
-
+9. crypto - used for generating OTP in the most secured way
 
 
 

@@ -1,10 +1,11 @@
-import React,  {useState ,useRef , useEffect} from 'react'
+import React,  {useState ,useRef , useEffect , useContext} from 'react'
 import {Link} from 'react-router-dom'
 import CaptainDetails from '../components/CaptainDetails'
 import RidePopup from '../components/RidePopup'
 import ConfirmRidePopup from '../components/ConfirmRidePopup'
 import gsap from 'gsap'
-
+import { SocketContext } from '../Context/SocketContext'
+import { captainDataContext } from '../Context/captainContext'
 
 function CaptainHome() {
 
@@ -51,6 +52,31 @@ function CaptainHome() {
 
   },[confirmRidePopup])
  
+  const {socket} = useContext(SocketContext)
+  const {captain} = useContext(captainDataContext)
+
+  useEffect(()=>{
+    // console.log(captain)   OK
+    socket.emit('join' , {userId : captain._id , userType:"captain" })
+
+
+    const updateLocation = () =>{
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(position => {
+          socket.emit('update-location-captain' , {
+            userId:captain._id,
+            ltd: position.coords.latitude,
+            lng: position.coords.longitude
+          })
+        })
+      }
+    }
+
+    // const locationInterval = setInterval(updateLocation , 10000)
+    // updateLocation()
+
+
+  },[])
 
 
 

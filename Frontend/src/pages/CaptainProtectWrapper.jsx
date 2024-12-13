@@ -10,30 +10,29 @@ function CaptainProtectedWrapper({children}) {
     const {captain , setCaptain}  = React.useContext(captainDataContext)
     const [isLoading, setIsLoading] = useState(true)
     const token = cookie.get('token')   //Checking for exisitance of cookie
+   
+useEffect(()=>{
+    console.log(token)
+    if(!token){
+      navigate('/captainlogin')
+    }
     
-    useEffect(()=>{
-        // console.log(token)
-        
-        if(!token){
-            navigate('/captainlogin')
-        }
-        
-        axios.get(`${import.meta.env.VITE_BASE_URL}/captain/profile`, {
-            withCredentials: true, // Ensures cookies are included in the request
-        }).then((response)=>{
-            if(response.status ===201){
-                const data = response.data
-                setCaptain(data.captain)
-                setIsLoading(false)
-            }
-        })
-        .catch((err) =>{
-            console.log(err , "Token not Recognised in Wrapper")
-        navigate('/captainlogin')
+    axios.get(`${import.meta.env.VITE_BASE_URL}/captain/profile` , {
+      withCredentials: true, // Ensures cookies are included in the request
+    }).then((response)=>{
+      if(response.status===201){
+        const data = response.data
+        setCaptain(data.captain)
+        setIsLoading(false)
+      }
+    })
+    .catch((err)=>{
+      console.log(err , "Token could not be Recognised")
+      navigate('/captainlogin')
     })
     
-},[navigate,setCaptain , setIsLoading, token ])
-
+  },[navigate , setCaptain , setIsLoading, token])
+     
 
     if(isLoading){
         return(

@@ -1,6 +1,9 @@
 import React from 'react'
 
 function LookingForDriver(props) {
+  // console.log(props.destination)
+  const desti = props.destination.split(' ')
+  const pickup = props.pickup.split(' ')
   return (
     <div>
     <h5
@@ -24,7 +27,7 @@ function LookingForDriver(props) {
         <div className="flex p-2 border-b-2 items-center gap-5">
           <i className="ri-map-pin-2-fill text-lg"></i>
           <div>
-            <h3 className="text-lg font-medium">562/11-A </h3>
+            <h3 className="text-lg font-medium">{pickup.slice(0,3).join(' ')}</h3>
             <p className="text-gray-600 text-sm">{props.pickup} </p>
           </div>
         </div>
@@ -32,7 +35,7 @@ function LookingForDriver(props) {
         <div className="flex p-2 border-b-2 items-center gap-5">
           <i class="ri-map-pin-user-line text-lg"></i>
           <div>
-            <h3 className="text-lg font-medium">562/11-A </h3>
+            <h3 className="text-lg font-medium">{desti.slice(0,3).join(' ')}</h3>
             <p className="text-gray-600 text-sm">{props.destination}</p>
           </div>
         </div>
@@ -40,7 +43,7 @@ function LookingForDriver(props) {
         <div className="flex p-2  items-center gap-5">
         <i className="ri-cash-line text-lg"></i>
           <div>
-            <h3 className="text-lg font-medium">{props.fare[props.vehicleType]}</h3>
+            <h3 className="text-lg font-medium">₹{props.fare[props.vehicleType]}</h3>
             <p className="text-gray-600 text-sm">Cash</p>
           </div>
         </div>

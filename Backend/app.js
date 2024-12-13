@@ -12,8 +12,11 @@ const rideRoutes = require('./Routes/rideRoutes')
 connectToDB()
  
 app.use(cors({
-    origin: 'http://localhost:5173', // Replace with your frontend's URL
+    origin: ['http://localhost:5173', 'https://05xn1502-5173.inc1.devtunnels.ms'], // Add allowed origins here
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true, // Allow credentials (cookies)
+    allowedHeaders: ['Content-Type', 'token'], // Add headers used by your requests
+
 }));
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))

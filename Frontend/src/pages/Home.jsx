@@ -1,5 +1,4 @@
-import React, { useEffect, useRef , useState} from 'react'
-import {useGSAP} from '@gsap/react'
+import React, { useContext, useEffect, useRef , useState} from 'react'
 import gsap from 'gsap'
 import 'remixicon/fonts/remixicon.css'
 import LocationSearchPanel from '../components/LocationSearchPanel'
@@ -9,6 +8,8 @@ import LookingForDriver from '../components/LookingForDriver'
 import WaitingForDriver from '../components/waitingForDriver'
 import axios from 'axios'
 import cookie from 'js-cookie'
+import { SocketContext } from '../Context/SocketContext'
+import { UserDataContext } from '../Context/UContext'
 
 function Home() {
 
@@ -214,9 +215,17 @@ function Home() {
   }catch(err){
     console.log(err , "Ride Could not be created")
   }
-
   }
 
+// Socket Code
+
+const {socket} = useContext(SocketContext)
+const {user} = useContext(UserDataContext)
+// console.log(user)    OK    
+
+useEffect(()=>{
+  socket.emit('join' , {userType:'user' , userId:user._id})
+}, [user])
 
 
   return (
@@ -262,15 +271,15 @@ function Home() {
       </div>
 
 
-      <div ref={confirmRide} className='confirmRide translate-y-full  bg-white fixed px-3 py-6 pt-12 z-10 bottom-0 w-full'>
+      <div ref={confirmRide} className='confirmRide translate-y-full  bg-white fixed px-3 py-12 pt-12 z-10 bottom-0 w-full'>
           <ConfirmRide pickup={pickup} fare={fare} vehicleType={vehicleType} destination={destination} createRide = {createRide}  setVehicleFound={setVehicleFound} setConfirmedVehicle={setConfirmedVehicle}></ConfirmRide>
       </div>
 
-      <div ref={vehicleFoundRef} className='vehicleFinding translate-y-full  bg-white fixed px-3 py-6 pt-12 z-10 bottom-0 w-full'>
+      <div ref={vehicleFoundRef} className='vehicleFinding translate-y-full  bg-white fixed px-3 py-12 pt-12 z-10 bottom-0 w-full'>
           <LookingForDriver pickup={pickup} fare={fare} vehicleType={vehicleType} destination={destination} setVehicleFound={setVehicleFound}></LookingForDriver>
       </div>
 
-      <div ref={waitingForDriverRef}  className='confirmRide   bg-white fixed px-3 py-6 pt-12 z-10 bottom-0 w-full'>
+      <div ref={waitingForDriverRef}  className='confirmRide   bg-white fixed px-3 py-12 pt-12 z-10 bottom-0 w-full'>
           <WaitingForDriver setWaitingForDriver={setWaitingForDriver}></WaitingForDriver>
       </div>
 

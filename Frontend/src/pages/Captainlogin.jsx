@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState ,useContext } from 'react'
 import {Link , useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import cookie from 'js-cookie'
@@ -22,6 +22,7 @@ function Captainlogin() {
         if(response.status===201){
             const data = response.data;
             setCaptain(data.captain)
+            console.log(data.token)
             cookie.set('token' , data.token)
             navigate('/captain-home')
             

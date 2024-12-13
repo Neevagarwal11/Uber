@@ -18,11 +18,13 @@ function Captainlogin() {
             password:password
         })
 
-        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captain/login` , captain)
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captain/login` , captain,{
+            withCredentials:true
+        })
         if(response.status===201){
             const data = response.data;
             setCaptain(data.captain)
-            console.log(data.token)
+            // console.log(data.token)
             cookie.set('token' , data.token)
             navigate('/captain-home')
             

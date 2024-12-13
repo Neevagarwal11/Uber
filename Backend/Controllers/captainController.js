@@ -58,7 +58,8 @@ module.exports.loginCaptain = async (req,res,next)=>{
     const token =  captain.generateAuthToken();
     res.cookie('token' ,token , {
         sameSite:'None',
-        httpOnly:true
+        httpOnly:true,
+        secure:true,    //Very essential when using the VS code ports devtunnel url
     })
 
     res.status(201).json({token , captain , message:"Captain Login Successfull"})

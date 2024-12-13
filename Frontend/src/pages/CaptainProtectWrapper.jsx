@@ -12,13 +12,13 @@ function CaptainProtectedWrapper({children}) {
     const token = cookie.get('token')   //Checking for exisitance of cookie
    
 useEffect(()=>{
-    console.log(token)
+    // console.log(token)   OK
     if(!token){
       navigate('/captainlogin')
     }
     
     axios.get(`${import.meta.env.VITE_BASE_URL}/captain/profile` , {
-      withCredentials: true, // Ensures cookies are included in the request
+      withCredentials:true
     }).then((response)=>{
       if(response.status===201){
         const data = response.data

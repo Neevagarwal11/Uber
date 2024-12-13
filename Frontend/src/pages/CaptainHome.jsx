@@ -72,8 +72,8 @@ function CaptainHome() {
       }
     }
 
-    // const locationInterval = setInterval(updateLocation , 10000)
-    // updateLocation()
+    const locationInterval = setInterval(updateLocation , 10000)
+    updateLocation()
 
 
   },[])

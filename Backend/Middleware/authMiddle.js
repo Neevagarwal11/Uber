@@ -8,14 +8,14 @@ const captainModel = require('../Models/captainModel');
 
 module.exports.authUser = async(req,res,next)=>{
     const token = req.cookies.token;
-    // console.log(token)
+    console.log(token , "Auth")
     if(!token){
         return res.status(401).json({message :"Unauthorized No cookie"})
     }
 
     const isBlackListed = await userModel.findOne({token:token})
     if(isBlackListed){
-        return res.status(401).json({message:'Unauthorized Cookie Blacklisted'})
+        return res.status(402).json({message:'Unauthorized Cookie Blacklisted'})
     }
 
 
@@ -29,19 +29,20 @@ module.exports.authUser = async(req,res,next)=>{
 
     }catch(err){
         console.log(err)
-        return res.status(401).json({message:"Unauthorized Cookie Auth Failed"})
+        return res.status(403).json({message:"Unauthorized Cookie Auth Failed"})
     }
 }
 
 module.exports.authCaptain = async(req,res,next)=>{
     const token = req.cookies.token
+    console.log(`${token} + JNJNN`)
     if(!token){
-        return res.status(401).json({message:"Unauthorized (no Token)"})
+        return res.status(404).json({message:"Unauthorized (no Token)"})
     }
 
     const isBlackListed = await blacklistToken.findOne({token:token})
     if(isBlackListed){
-        return res.status(401).json({message:"Unauthorized (in blacklist)"})
+        return res.status(402).json({message:"Unauthorized (in blacklist)"})
     }
 
     try{
@@ -53,6 +54,6 @@ module.exports.authCaptain = async(req,res,next)=>{
         
     }catch(err){
         console.log(err)
-        return res.status(400).json({message:"Unauthorized"})
+        return res.status(403).json({message:"Unauthorized"})
     }
 }

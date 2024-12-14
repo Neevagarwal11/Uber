@@ -58,15 +58,10 @@ const captainSchema  = new mongoose.Schema({
             required:true,
             enum:['car' , 'motorcycle' , 'auto'],
         },
-        location:{
-            ltd:{
-                type:Number,
-
-            },
-            lng:{
-                type:Number,
-            }
-        }
+        location: {  
+            ltd: Number,
+            lng: Number,
+        },
     }
 }) 
 

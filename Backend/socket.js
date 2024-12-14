@@ -43,17 +43,15 @@ function initializeSocket(server){
             if(!location || !location.ltd || !location.lng){
                 return socket.emit('error' , {message:"Invalid Location"})
             }
+         
             
-            
-            console.log(`User ${userId} updated location to ${location}`)
-            
-            await captainModel.findByIdAndUpdate(userId , {location:{
+            const response = await captainModel.findByIdAndUpdate(userId , {
+               $set:{ location:{
                 ltd:location.ltd,
-                lng:location.lng
-            }});
-
-
-
+                lng:location.lng}
+            }},
+            {new:true  ,strict:false}
+        );
 
         })
     })
@@ -61,13 +59,13 @@ function initializeSocket(server){
 
 
 
-function sendMessageToSocketId(socketId,message){
+function sendMessageToSocketId(socketId,messageObject){
 
     if(io){
-        io.to(socketId).emit('message', message)
+        io.to(socketId).emit(messageObject.event, messageObject.data)
     }else{
         console.log('Socket.io not initialied')
-    }
+    } 
 
 }
 

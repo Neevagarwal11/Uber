@@ -107,12 +107,16 @@ module.exports.getSuggestion = async (input)=>{
 
 module.exports.getCaptainsInRadius = async (ltd,lng,radius)=>{
 
+    //radius in km
+
     const captains = await captainModel.find({
         location:{
             $geoWithin:{
-                $centerSphere:[[ltd,lng] , radius/3963.2]
+                $centerSphere:[[ltd,lng] , radius/6371]
             }
         }
     })
+
+    return captains
 
 }

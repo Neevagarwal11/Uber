@@ -62,11 +62,14 @@ function CaptainHome() {
 
     const updateLocation = () =>{
       if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(position => {
+        navigator.geolocation.getCurrentPosition(position => {  
+
           socket.emit('update-location-captain' , {
             userId:captain._id,
-            ltd: position.coords.latitude,
-            lng: position.coords.longitude
+            location:{
+              ltd: position.coords.latitude,
+              lng: position.coords.longitude
+            }
           })
         })
       }
@@ -77,6 +80,10 @@ function CaptainHome() {
 
 
   },[])
+
+  socket.on('new-ride' , (data) =>{
+    console.log(data)
+  })
 
 
 

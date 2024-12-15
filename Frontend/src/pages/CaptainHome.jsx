@@ -9,7 +9,7 @@ import { captainDataContext } from '../Context/captainContext'
 
 function CaptainHome() {
 
-  const [ridePopup, setRidePopup] = useState(true)
+  const [ridePopup, setRidePopup] = useState(false)
   const ridePopupRef = useRef(null)
   const [confirmRidePopup, setConfirmRidePopup] = useState(false)
   const confirmRideRef = useRef(null)
@@ -83,7 +83,11 @@ function CaptainHome() {
 
   socket.on('new-ride' , (data) =>{
     console.log(data)
+    setRide(data)
+    setRidePopup(true)
   })
+
+  const [ride, setRide] = useState(null)
 
 
 
@@ -110,7 +114,7 @@ function CaptainHome() {
 
 
       <div ref={ridePopupRef} className='translate-y-full  bg-white fixed px-3 py-8 pt-12 z-10 bottom-0 w-full'>
-        <RidePopup setRidePopup={setRidePopup} setConfirmRidePopup={setConfirmRidePopup}></RidePopup>
+        <RidePopup ride={ride}  setRidePopup={setRidePopup} setConfirmRidePopup={setConfirmRidePopup}></RidePopup>
       </div>
 
       <div ref={confirmRideRef} className='translate-y-full  bg-white fixed h-screen px-3 py-8 pt-12 z-10 bottom-0 w-full'>

@@ -272,7 +272,7 @@ useEffect(()=>{
 
 
       <div ref={confirmRide} className='confirmRide translate-y-full  bg-white fixed px-3 py-12 pt-12 z-10 bottom-0 w-full'>
-          <ConfirmRide pickup={pickup} fare={fare} vehicleType={vehicleType} destination={destination} createRide = {createRide}  setVehicleFound={setVehicleFound} setConfirmedVehicle={setConfirmedVehicle}></ConfirmRide>
+          <ConfirmRide  pickup={pickup} fare={fare} vehicleType={vehicleType} destination={destination} createRide = {createRide}  setVehicleFound={setVehicleFound} setConfirmedVehicle={setConfirmedVehicle}></ConfirmRide>
       </div>
 
       <div ref={vehicleFoundRef} className='vehicleFinding translate-y-full  bg-white fixed px-3 py-12 pt-12 z-10 bottom-0 w-full'>

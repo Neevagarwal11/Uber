@@ -4,8 +4,8 @@ import 'remixicon/fonts/remixicon.css'
 
 function RidePopup(props) {
 
-  const desti = props.ride?.destination.split(' ')
-  const pickup = props.ride?.pickup.split(' ')
+  const desti = props.ride?.destination.split(' ') || []
+  const pickup = props.ride?.pickup.split(' ') || []
 
   return (
     <div>
@@ -55,7 +55,7 @@ function RidePopup(props) {
 
         <div className='flex w-full items-center justify-center gap-4'>
 
-      <button onClick={()=>{props.setConfirmRidePopup(true) , props.setRidePopup(false)} } className="p-3  bg-green-500 text-white font-semibold rounded-lg">
+      <button onClick={()=>{props.confirmRide() , props.setConfirmRidePopup(true) , props.setRidePopup(false)} } className="p-3  bg-green-500 text-white font-semibold rounded-lg">
         Accept Ride
       </button>
 

@@ -16,4 +16,11 @@ router.post('/create' , authMiddleware.authUser ,
     query('destination').isString().isLength({min:3}).withMessage("Invalid Destination Location")
     , rideController.getFare)
 
+router.post('/confirm' ,
+   authMiddleware.authCaptain,
+   body('rideId').isMongoId().withMessage('Invalid ride ID'),
+   rideController.confirmRide
+
+)
+
  module.exports = router

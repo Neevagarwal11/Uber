@@ -139,7 +139,7 @@ function Home() {
   const [destinationsuggestion, setDestinationsuggestion] = useState([])
   const [activeField, setActiveField] = useState('')
   const [fare, setFare] = useState({})
-
+  const [ride, setRide] = useState(null)
 
   const handelPickupChange = async (e)=>{
 
@@ -217,7 +217,7 @@ function Home() {
   }
   }
 
-// Socket Code
+//-------------- Socket Code
 
 const {socket} = useContext(SocketContext)
 const {user} = useContext(UserDataContext)
@@ -226,6 +226,15 @@ const {user} = useContext(UserDataContext)
 useEffect(()=>{
   socket.emit('join' , {userType:'user' , userId:user._id})
 }, [user])
+
+
+socket.on('ride-confirmed' , (ride) =>{
+  setVehicleFound(false)
+  setWaitingForDriver(true)
+  setRide(ride)
+  // console.log(ride)  OK
+  
+})
 
 
   return (
@@ -265,7 +274,7 @@ useEffect(()=>{
 
 
 
-      <div ref={vehiclePanelref} className='vehicleSelection translate-y-full  bg-white fixed px-3 py-8 pt-12 z-10 bottom-0 w-full'>
+      <div ref={vehiclePanelref} className='vehicleSelection translate-y-full  bg-white fixed px-3 pt-4 py-12 z-10 bottom-0 w-full'>
         <VehiclePanel selectVehicle={setVehicleType} fare={fare} setConfirmedVehicle={setConfirmedVehicle} setVehiclePanel={setVehiclePanel}></VehiclePanel>
         
       </div>
@@ -280,7 +289,7 @@ useEffect(()=>{
       </div>
 
       <div ref={waitingForDriverRef}  className='confirmRide   bg-white fixed px-3 py-12 pt-12 z-10 bottom-0 w-full'>
-          <WaitingForDriver setWaitingForDriver={setWaitingForDriver}></WaitingForDriver>
+          <WaitingForDriver ride={ride} setWaitingForDriver={setWaitingForDriver}></WaitingForDriver>
       </div>
 
 

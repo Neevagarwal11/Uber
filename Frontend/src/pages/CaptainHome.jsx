@@ -6,6 +6,7 @@ import ConfirmRidePopup from '../components/ConfirmRidePopup'
 import gsap from 'gsap'
 import { SocketContext } from '../Context/SocketContext'
 import { captainDataContext } from '../Context/captainContext'
+import axios from 'axios'
 
 function CaptainHome() {
 
@@ -91,6 +92,22 @@ function CaptainHome() {
 
 
 
+  async function confirmRide(){
+
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/confirm`, {
+      rideId:ride._id,
+      captain:captain._id
+    } , {
+      withCredentials:true
+    })
+    console.log(response)
+
+    setRidePopup(false)
+    setConfirmRidePopup(true)
+  }
+
+
+
   return (
     <div className="h-screen">
       <img  className='w-12 absolute left-5 top-5' src="https://www.svgrepo.com/show/505031/uber-driver.svg" alt="LOGO" />
@@ -114,7 +131,7 @@ function CaptainHome() {
 
 
       <div ref={ridePopupRef} className='translate-y-full  bg-white fixed px-3 py-8 pt-12 z-10 bottom-0 w-full'>
-        <RidePopup ride={ride}  setRidePopup={setRidePopup} setConfirmRidePopup={setConfirmRidePopup}></RidePopup>
+        <RidePopup ride={ride} confirmRide={confirmRide}  setRidePopup={setRidePopup} setConfirmRidePopup={setConfirmRidePopup}></RidePopup>
       </div>
 
       <div ref={confirmRideRef} className='translate-y-full  bg-white fixed h-screen px-3 py-8 pt-12 z-10 bottom-0 w-full'>

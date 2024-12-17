@@ -1,13 +1,15 @@
 import React, { useState , useRef ,useEffect} from 'react'
-import {Link} from 'react-router-dom'
+import {Link , useLocation} from 'react-router-dom'
 import gsap from 'gsap'
 import FinishRide from '../components/FinishRide'
+import LiveTracking from '../components/liveTracking'
 
 function CaptainRiding() {    
 
     const [finishRidePanel, setFinishRidePanel] = useState(false)
     const FinishRideRef = useRef(null)
-
+    const location = useLocation()
+    const rideData = location.state?.ride
 
 
   useEffect(()=>{
@@ -37,12 +39,8 @@ function CaptainRiding() {
     <Link to='/home' className="fixed h-10 w-10 bg-white right-2 top-2 flex items-center justify-center rounded-full"><i className="ri-logout-box-r-line"></i></Link>
     </div>
 
-      <div className="h-4/5 ">
-        <img
-          className="w-full h-full object-cover"
-          src="https://www.spaceotechnologies.com/wp-content/uploads/2021/04/ubermap_blur1.jpg.webp"
-          alt=""
-        />
+      <div className="h-4/5 relative -z-[1] ">
+      <LiveTracking></LiveTracking>
       </div>
 
       <div onClick={()=>{setFinishRidePanel(true)}} className="h-1/5 relative p-6 flex items-center  justify-center flex-col  bg-yellow-400">
@@ -51,8 +49,8 @@ function CaptainRiding() {
             <button className="w-full mt-5 flex justify-center items-center  bg-green-500 text-white font-semibold p-3 rounded-lg">Complete Ride</button>
       </div>
 
-      <div ref={FinishRideRef} className='translate-y-full  bg-white fixed px-3 py-8 pt-12 z-10 bottom-0 w-full'>
-        <FinishRide setFinishRidePanel={setFinishRidePanel}></FinishRide>
+      <div ref={FinishRideRef} className='translate-y-full  bg-white fixed px-3 py-8 pt-12 z-[500] bottom-0 w-full'>
+        <FinishRide ride={rideData}  setFinishRidePanel={setFinishRidePanel}></FinishRide>
       </div>
 
 

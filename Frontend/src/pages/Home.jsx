@@ -10,6 +10,8 @@ import axios from 'axios'
 import cookie from 'js-cookie'
 import { SocketContext } from '../Context/SocketContext'
 import { UserDataContext } from '../Context/UContext'
+import { useNavigate } from 'react-router-dom'
+import LiveTracking from '../components/liveTracking'
 
 function Home() {
 
@@ -236,17 +238,24 @@ socket.on('ride-confirmed' , (ride) =>{
   
 })
 
+const navigate = useNavigate()
+
+socket.on('ride-started' , ride =>{
+  setWaitingForDriver(false)
+  navigate('/riding' , {state: ride})
+})
+
 
   return (
-    <div className='h-screen relative overflow-hidden'>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="" className='w-16 absolute left-5 top-5' />
+    <div className='h-screen relative overflow-hidden z-10'>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="" className='w-16  absolute left-5 top-5' />
 
-      <div className='h-screen w-full' onClick={()=>{ setVehiclePanel(false) ,setPanelOpen(false) }}>
+      <div className='h-screen w-full  ' onClick={()=>{ setVehiclePanel(false) ,setPanelOpen(false) }}>
         {/* Temporary Image */}
-        <img className='w-full h-full object-cover' src="https://www.spaceotechnologies.com/wp-content/uploads/2021/04/ubermap_blur1.jpg.webp" alt="" />
+        <LiveTracking></LiveTracking>
       </div>
 
-      <div className=' absolute h-screen flex flex-col justify-end top-0 w-full '>
+      <div className=' absolute  h-screen flex flex-col justify-end top-0 w-full '>
         <div className='h[30%] p-5 bottom-0  bg-white relative'>
           <h5 ref={panelCloseRef} onClick={()=>{setPanelOpen(false)}} className='absolute  top-6 right-6 text-2xl'><i className="ri-arrow-down-wide-line"></i></h5>
         <h4 className='text-2xl font-semibold'>Find a Trip</h4>

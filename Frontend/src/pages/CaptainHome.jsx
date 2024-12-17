@@ -135,7 +135,7 @@ function CaptainHome() {
       </div>
 
       <div ref={confirmRideRef} className='translate-y-full  bg-white fixed h-screen px-3 py-8 pt-12 z-10 bottom-0 w-full'>
-        <ConfirmRidePopup setConfirmRidePopup={setConfirmRidePopup}></ConfirmRidePopup>
+        <ConfirmRidePopup ride={ride} setConfirmRidePopup={setConfirmRidePopup}></ConfirmRidePopup>
       </div>
 
 

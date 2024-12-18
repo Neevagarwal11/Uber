@@ -3,7 +3,7 @@ import { LoadScript , GoogleMap , Marker } from '@react-google-maps/api'
 
 const containerStyle = {
     width: '100%',
-    height: '100%'
+    height: '550px'
 }
 
 const center = {
@@ -47,7 +47,7 @@ function liveTracking() {
     })
 
   return (
-    <div>
+    <div >
         <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API}>
             <GoogleMap mapContainerStyle={containerStyle} center={currentPosition} zoom={15}>
                 <Marker position={currentPosition} />

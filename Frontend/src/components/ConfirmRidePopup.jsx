@@ -7,7 +7,7 @@ function ConfirmRidePopup(props) {
 
     const [otp, setOtp] = useState('')
     const navigate = useNavigate()
-    
+
     const submitHandler =async (e)=>{
         e.preventDefault()
 

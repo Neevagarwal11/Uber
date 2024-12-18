@@ -9,8 +9,8 @@ function CaptainRiding() {
     const [finishRidePanel, setFinishRidePanel] = useState(false)
     const FinishRideRef = useRef(null)
     const location = useLocation()
-    const rideData = location.state?.ride
-
+    const { ride } = location.state || {}
+    
 
   useEffect(()=>{
 
@@ -39,8 +39,8 @@ function CaptainRiding() {
     <Link to='/home' className="fixed h-10 w-10 bg-white right-2 top-2 flex items-center justify-center rounded-full"><i className="ri-logout-box-r-line"></i></Link>
     </div>
 
-      <div className="h-4/5 relative -z-[1] ">
-      <LiveTracking></LiveTracking>
+      <div className="h-4/5">
+      <LiveTracking className="h-[900px]"></LiveTracking>
       </div>
 
       <div onClick={()=>{setFinishRidePanel(true)}} className="h-1/5 relative p-6 flex items-center  justify-center flex-col  bg-yellow-400">
@@ -50,7 +50,7 @@ function CaptainRiding() {
       </div>
 
       <div ref={FinishRideRef} className='translate-y-full  bg-white fixed px-3 py-8 pt-12 z-[500] bottom-0 w-full'>
-        <FinishRide ride={rideData}  setFinishRidePanel={setFinishRidePanel}></FinishRide>
+        <FinishRide ride={ride}  setFinishRidePanel={setFinishRidePanel}></FinishRide>
       </div>
 
 

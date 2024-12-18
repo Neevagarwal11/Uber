@@ -81,14 +81,13 @@ function CaptainHome() {
 
 
   },[])
-
+  const [ride, setRide] = useState(null)
+  
   socket.on('new-ride' , (data) =>{
-    console.log(data)
     setRide(data)
     setRidePopup(true)
   })
 
-  const [ride, setRide] = useState(null)
 
 
 

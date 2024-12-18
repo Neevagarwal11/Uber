@@ -17,16 +17,14 @@ function riding() {
   })
 
   return (
-    <div className="h-screen">
+    <div className="h-screen relative">
       <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="" className='w-16 absolute left-5 top-5' />
 
     <Link to='/home' className="fixed h-10 w-10 bg-white right-2 top-2 flex items-center justify-center rounded-full"><i className="text-lg font-medium ri-home-6-line"></i></Link>
 
-      <div className="h-1/2 ">
-       <LiveTracking></LiveTracking>
-      </div>
+       <LiveTracking ></LiveTracking>
 
-      <div className="h-1/2 p-4">
+      <div className="h-1/2 w-full p-3 z-[100] bg-white absolute bottom-0">
         <div className="flex items-center flex-row justify-between ">
           <img
             className="h-14"

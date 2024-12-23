@@ -13,7 +13,7 @@ connectToDB()
  
 app.use(cookieParser())
 app.use(cors({
-    origin: ['*'], // Add allowed origins here
+    origin: '*', // Add allowed origins here    
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true, // Allow cookies to be sent
 }));

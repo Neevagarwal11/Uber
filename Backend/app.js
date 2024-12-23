@@ -13,7 +13,7 @@ connectToDB()
  
 app.use(cookieParser())
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://05xn1502-5173.inc1.devtunnels.ms'], // Add allowed origins here
+    origin: ['http://localhost:5173', 'https://05xn1502-5173.inc1.devtunnels.ms' , 'https://fullstack-uber-frontend.vercel.app'], // Add allowed origins here
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true, // Allow cookies to be sent
 }));

@@ -15,10 +15,10 @@ useEffect(()=>{
   if(!token){
     navigate('/userlogin')
   }
-  
+//  console.log(token)    OK 
   axios.get(`${import.meta.env.VITE_BASE_URL}/users/profile` , {
     withCredentials: true, // Ensures cookies are included in the request
-  }).then((response)=>{
+  }).then(response=>{
     if(response.status===200){
       const data = response.data
       setUser(data)

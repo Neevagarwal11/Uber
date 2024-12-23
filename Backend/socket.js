@@ -12,7 +12,8 @@ function initializeSocket(server){
         cors:{
             origin:'https://fullstack-uber-frontend.vercel.app',
             methods:[ 'GET' , 'POST'],
-            Credential:true
+            allowedHeaders: ['Content-Type', 'Authorization'],
+            credential:true
         }
     });
 

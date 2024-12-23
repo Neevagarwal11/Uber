@@ -10,7 +10,7 @@ function initializeSocket(server){
 
     io= socketIo(server, {
         cors:{
-            origin:'*',
+            origin:'https://fullstack-uber-frontend.vercel.app',
             methods:[ 'GET' , 'POST'],
             Credential:true
         }

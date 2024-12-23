@@ -29,6 +29,8 @@ function Userlogin() {
             localStorage.setItem('token' , data.token)
             cookie.set('token' , data.token)
             navigate('/home')
+        }else{
+            console.log('Error During sending axios request to the URL')
         }
         
         setEmail('')

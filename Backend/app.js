@@ -14,7 +14,7 @@ connectToDB()
  
 app.use(cookieParser())
 app.use(cors({
-    origin:['http://localhost:5000' ,'https://fullstack-uber-frontend.vercel.app'],
+    origin:['http://localhost:5000'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true, // Allow cookies to be sent
     allowedHeaders: ['Content-Type', 'Authorization'],

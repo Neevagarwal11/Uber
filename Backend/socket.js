@@ -11,7 +11,7 @@ function initializeSocket(server){
     io= socketIo(server, {
         cors:{
             origin: [
-                'http://localhost:5000',
+                'https://uber-ho3a.onrender.com/',
             ],
             methods:[ 'GET' , 'POST'],
             allowedHeaders: ['Content-Type', 'Authorization'],

@@ -3,7 +3,7 @@ import { io } from 'socket.io-client';
 
 export const SocketContext = createContext();
 
-const socket = io('https://uber-ho3a.onrender.com' , {withCredentials:true ,transports: ['websocket']
+const socket = io('wss://uber-ho3a.onrender.com' , {withCredentials:true ,transports: ['websocket']
 });
 
 function SocketProvider({ children }) {

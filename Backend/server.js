@@ -3,9 +3,15 @@ const app = require('./app')
 const port = process.env.PORT || 3000
 const server = http.createServer(app)
 const { initializeSocket } = require('./socket')
+const path = require('path');
+const express = require('express');
 
 
-
+// const _dirname = path.resolve()
+// app.use(express.static(path.join(_dirname , '/Frontend/dist')))
+// app.get('*' , (req,res)=>{
+//     res.sendFile(path.resolve(_dirname , 'Frontend' , 'dist' , 'index.html'))
+// })
 
 //SERVER CALL
 server.listen(port, (err) => {

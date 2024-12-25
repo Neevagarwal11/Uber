@@ -10,11 +10,16 @@ function initializeSocket(server){
 
     io= socketIo(server, {
         cors:{
-            origin:['http://localhost:5173' , 'https://fullstack-uber-frontend.vercel.app' , 'https://uber-client-eight.vercel.app'],
+            origin: [
+                'http://localhost:5173',
+                'http://localhost:5000',
+                'https://fullstack-uber-frontend.vercel.app'
+            ],
             methods:[ 'GET' , 'POST'],
             allowedHeaders: ['Content-Type', 'Authorization'],
-            credential:true
-        }
+            credentials: true,
+        },
+        transports: ['websocket'], // Force WebSocket
     });
 
     io.on('connection' , (socket)=>{

@@ -3,24 +3,31 @@ const cookieParser = require('cookie-parser')
 dotenv.config()
 const express = require('express')
 const app = express()
-const cors = require('cors')
 const connectToDB = require('./DB/db')
 const userRoutes = require('./Routes/userRoutes')
 const captainRoutes = require('./Routes/captainRoutes')
 const mapRoutes = require('./Routes/mapsRoute')
 const rideRoutes = require('./Routes/rideRoutes')
+const path  = require('path')
+const cors = require('cors')
 connectToDB()
  
 app.use(cookieParser())
 app.use(cors({
-    origin:['http://localhost:5173' , 'https://fullstack-uber-frontend.vercel.app', 'https://uber-client-eight.vercel.app'],
+    origin:['http://localhost:5000' ,'https://fullstack-uber-frontend.vercel.app'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true, // Allow cookies to be sent
-
+    allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
+const _dirname = path.resolve()
+app.use(express.static(path.join(_dirname , '/Frontend/dist')))
+app.get('*' , (req,res)=>{
+    res.sendFile(path.resolve(_dirname , 'Frontend' , 'dist' , 'index.html'))
+})
 
 app.get('/' , (req,res)=>{
     res.send('Hello World')

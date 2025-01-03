@@ -153,8 +153,9 @@ function Home() {
         params:{input:e.target.value},
         withCredentials:true
       })
+
+      console.log(response.data)
       setPickupSuggestion(response.data)
-      // console.log(pickupSuggestion)  gives an array 
     }catch(err){
       console.log(err , "Pickup Change mai error")
     }
@@ -272,7 +273,7 @@ socket.on('ride-started' , ride =>{
 
         <div ref={panelRef} className=' bg-white  h-[0%] '>
           <LocationSearchPanel setPanelOpen={setPanelOpen} setVehiclePanel={setVehiclePanel}
-          suggestions={activeField ==='pickup' ? pickupSuggestion: destinationsuggestion}
+          suggestions={activeField ==='pickup' ? pickupSuggestion : destinationsuggestion}
           setPickup = {setPickup} 
           setDestination={setDestination}
           activeField={activeField}

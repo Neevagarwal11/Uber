@@ -1,5 +1,8 @@
 const axios = require('axios')
 const captainModel = require('../Models/captainModel')
+// require('dotenv').config({path:'./.env'})
+require('dotenv').config({ path: './.env' }) // Load environment variables from .env file in the root directory
+
 
 module.exports.getAddressCoordinate = async(address)=>{
     const apiKey = process.env.GOOGLE_MAPS_API;
@@ -74,6 +77,11 @@ module.exports.getSuggestion = async (input)=>{
     }
 
     const apiKey = process.env.GOOGLE_MAPS_API
+    if (!apiKey) {
+        throw new Error('GOOGLE_MAPS_API is not defined in the environment variables.');
+      }
+
+    console.log(apiKey)
     const url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json'
 
     try{
@@ -85,16 +93,16 @@ module.exports.getSuggestion = async (input)=>{
             }
         })
 
+        
         if(response.data.status === 'OK'){
+            console.log(response.data.predictions)
+
             return response.data.predictions.map((prediction)=>({
                 description:prediction.description,
                 placeId:prediction.place_id,
                 offset:prediction.offset
             }));
-            // return response.data.predictions.map((prediction) => ({
-            //     description: prediction.description,
-            //     placeId: prediction.place_id,
-            //   }));
+
         }else{
             throw new Error('Unable to fetch Suggestion')
         }

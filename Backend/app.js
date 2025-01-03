@@ -14,7 +14,7 @@ connectToDB()
  
 app.use(cookieParser())
 app.use(cors({
-    origin:['https://uber-ho3a.onrender.com'],
+    origin:['https://uber-ho3a.onrender.com' , 'http://localhost:5000'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true, // Allow cookies to be sent
     allowedHeaders: ['Content-Type', 'Authorization'],
